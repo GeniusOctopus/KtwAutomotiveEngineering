@@ -1,0 +1,6 @@
+@KtwAutomotiveEngineering.Api.V1_HostAddress = http://localhost:44337
+
+GET {{KtwAutomotiveEngineering.Api.V1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

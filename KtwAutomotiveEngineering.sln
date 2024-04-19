@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering", "src\KtwAutomotiveEngineering\KtwAutomotiveEngineering.csproj", "{678FAAF7-3EE5-4EA7-973F-112993070296}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Client", "src\KtwAutomotiveEngineering.Client\KtwAutomotiveEngineering.Client.csproj", "{6D0F2DC6-AF8E-4120-B589-56A7CE703328}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Api.V1", "src\KtwAutomotiveEngineering.Api.V1\KtwAutomotiveEngineering.Api.V1.csproj", "{7AD129A8-CF93-485D-B824-F6703EAEF92A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Shared", "src\KtwAutomotiveEngineering.Shared\KtwAutomotiveEngineering.Shared.csproj", "{A69CC6A1-9346-4331-B678-201FB56709A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.DataAccess", "src\KtwAutomotiveEngineering.DataAccess\KtwAutomotiveEngineering.DataAccess.csproj", "{97CDE067-D860-4200-ACFF-0167361E4BA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Test", "test\KtwAutomotiveEngineering.Test\KtwAutomotiveEngineering.Test.csproj", "{27EECB3A-5E13-4CC7-92AA-E739097D671C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{678FAAF7-3EE5-4EA7-973F-112993070296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678FAAF7-3EE5-4EA7-973F-112993070296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678FAAF7-3EE5-4EA7-973F-112993070296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678FAAF7-3EE5-4EA7-973F-112993070296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69CC6A1-9346-4331-B678-201FB56709A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69CC6A1-9346-4331-B678-201FB56709A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69CC6A1-9346-4331-B678-201FB56709A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69CC6A1-9346-4331-B678-201FB56709A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CDE067-D860-4200-ACFF-0167361E4BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CDE067-D860-4200-ACFF-0167361E4BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CDE067-D860-4200-ACFF-0167361E4BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CDE067-D860-4200-ACFF-0167361E4BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40DDC832-7BC8-49A0-A0A5-458E7D895964}
+	EndGlobalSection
+EndGlobal
