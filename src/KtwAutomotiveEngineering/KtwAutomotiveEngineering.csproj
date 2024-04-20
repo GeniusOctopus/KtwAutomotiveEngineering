@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KtwAutomotiveEngineering.Client\KtwAutomotiveEngineering.Client.csproj" />
+    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KtwAutomotiveEngineering.Api.V1\KtwAutomotiveEngineering.Api.V1.csproj" />
+    <ProjectReference Include="..\KtwAutomotiveEngineering.Blazor\KtwAutomotiveEngineering.Blazor.csproj" />
+    <ProjectReference Include="..\KtwAutomotiveEngineering.Shared\KtwAutomotiveEngineering.V1.Shared.csproj" />
   </ItemGroup>
 
 </Project>

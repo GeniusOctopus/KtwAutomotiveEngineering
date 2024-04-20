@@ -1,4 +1,4 @@
-namespace KtwAutomotiveEngineering.Api.V1
+﻿namespace KtwAutomotiveEngineering.Shared
 {
     public class WeatherForecast
     {
