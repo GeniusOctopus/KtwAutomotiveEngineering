@@ -1,5 +1,7 @@
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
+using Serilog;
+using Serilog.Core;
 
 namespace KtwAutomotiveEngineering
 {
@@ -8,6 +10,28 @@ namespace KtwAutomotiveEngineering
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.UseSerilog((ctx, logBuilder) =>
+            {
+                logBuilder
+                    .Enrich.WithProperty("Environment", ctx.HostingEnvironment.EnvironmentName)
+                    .Enrich.WithProperty("Application", ctx.HostingEnvironment.ApplicationName)
+                    .Enrich.FromLogContext();
+
+                if (ctx.HostingEnvironment.IsDevelopment())
+                {
+                    logBuilder.WriteTo.Console();
+                    logBuilder.WriteTo.Debug();
+                }
+                else
+                {
+                    var seq = ctx.Configuration.GetSection("Seq");
+                    var levelSwitch = new LoggingLevelSwitch(Serilog.Events.LogEventLevel.Verbose);
+                    logBuilder.WriteTo.Seq(seq["ServerUrl"]!,
+                        apiKey: seq["ApiKey"],
+                        controlLevelSwitch: levelSwitch);
+                }
+            });
 
             builder.Services.AddControllers();
 
