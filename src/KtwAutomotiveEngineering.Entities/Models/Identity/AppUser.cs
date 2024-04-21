@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace KtwAutomotiveEngineering.V1.Shared.Identity.Entities
+namespace KtwAutomotiveEngineering.Entities.Models.Identity
 {
     public class AppUser : IdentityUser
     {

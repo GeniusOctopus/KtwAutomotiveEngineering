@@ -1,11 +1,16 @@
 ﻿using KtwAutomotiveEngineering.DataAccess;
-using KtwAutomotiveEngineering.V1.Shared.Identity.Entities;
+using KtwAutomotiveEngineering.Entities.Models.Identity;
+using KtwAutomotiveEngineering.Service;
+using KtwAutomotiveEngineering.Service.Contracts;
 using Microsoft.AspNetCore.Identity;
 
 namespace KtwAutomotiveEngineering.Extensions
 {
     public static class ServiceExtensions
     {
+        public static void ConfigureServiceManager(this IServiceCollection services) =>
+            services.AddScoped<IServiceManager, ServiceManager>();
+
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             var builder = services.AddIdentity<AppUser, IdentityRole>(options =>

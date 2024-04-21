@@ -4,10 +4,5 @@
 <h1>Hello, world!</h1>
 
 @code {
-    [Inject] public HttpClient HttpClient { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        await HttpClient.GetFromJsonAsync<WeatherForecast>("api/v1/weatherforecast");
-    }
 }

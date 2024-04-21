@@ -1,4 +1,4 @@
-﻿using KtwAutomotiveEngineering.V1.Shared.Identity.Entities;
+﻿using KtwAutomotiveEngineering.Entities.Models.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

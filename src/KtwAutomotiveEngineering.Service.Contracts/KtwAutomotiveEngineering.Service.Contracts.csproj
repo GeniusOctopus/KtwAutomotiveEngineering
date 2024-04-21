@@ -2,16 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KtwAutomotiveEngineering.Service.Contracts\KtwAutomotiveEngineering.Service.Contracts.csproj" />
     <ProjectReference Include="..\KtwAutomotiveEngineering.V1.Shared\KtwAutomotiveEngineering.V1.Shared.csproj" />
   </ItemGroup>
 
