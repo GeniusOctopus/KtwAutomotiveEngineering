@@ -1,5 +1,8 @@
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
+using KtwAutomotiveEngineering.DataAccess;
+using KtwAutomotiveEngineering.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Core;
 
@@ -53,7 +56,15 @@ namespace KtwAutomotiveEngineering
                     options.Conventions.Add(new VersionByNamespaceConvention());
                 });
 
+            builder.Services.AddDbContext<RepositoryContext>(options =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("SqlConnection");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+
             builder.Services.AddOpenApiDocument();
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
 
             var app = builder.Build();
 
