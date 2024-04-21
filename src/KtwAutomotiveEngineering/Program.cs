@@ -59,7 +59,7 @@ namespace KtwAutomotiveEngineering
             builder.Services.AddDbContext<RepositoryContext>(options =>
             {
                 var connectionString = builder.Configuration.GetConnectionString("SqlConnection");
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), b => b.MigrationsAssembly(nameof(KtwAutomotiveEngineering)));
             });
 
             builder.Services.AddOpenApiDocument();
