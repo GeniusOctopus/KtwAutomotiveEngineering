@@ -28,5 +28,16 @@ namespace KtwAutomotiveEngineering.Api.V1.Controllers.Identity
 
             return StatusCode(201);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if (!await _service.AuthenticationService.ValidateUserAsync(user))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new { Token = await _service.AuthenticationService.CreateTokenAsync() });
+        }
     }
 }
