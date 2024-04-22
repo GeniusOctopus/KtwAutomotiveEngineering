@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using KtwAutomotiveEngineering.Entities.ConfigurationModels;
 using KtwAutomotiveEngineering.Entities.Exceptions;
 using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service.Contracts.Services.Identity;
 using KtwAutomotiveEngineering.V1.Shared.Dto.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,14 +17,16 @@ using System.Text;
 namespace KtwAutomotiveEngineering.Service.Services.Identity
 {
     public class AuthenticationService(UserManager<AppUser> userManager,
-                                       IConfiguration configuration,
-                                       IMapper mapper,
-                                       ILogger logger) : IAuthenticationService
+                                   IConfiguration configuration,
+                                   IMapper mapper,
+                                   ILogger logger,
+                                   IOptions<JwtConfiguration> jwtConfiguration) : IAuthenticationService
     {
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly IConfiguration _configuration = configuration;
         private readonly IMapper _mapper = mapper;
         private readonly ILogger _logger = logger;
+        private readonly JwtConfiguration _jwtConfiguration = jwtConfiguration.Value;
 
         private AppUser? _user;
 
@@ -56,7 +60,6 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
 
         public async Task<TokenDto> CreateTokenAsync(bool populateExp)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
             var signingCredentials = GetSigningCredentials();
             var claims = await GetClaims();
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
@@ -67,7 +70,7 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
 
             if (populateExp)
             {
-                _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(Convert.ToDouble(jwtSettings["refreshTokenExpires"]));
+                _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(Convert.ToDouble(_jwtConfiguration.RefreshTokenExpires));
             }
 
             await _userManager.UpdateAsync(_user);
@@ -94,7 +97,7 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
 
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Encoding.UTF8.GetBytes(_configuration["JwtSecret"]!);
+            var key = Encoding.UTF8.GetBytes(_jwtConfiguration.JwtSecret!);
             var secret = new SymmetricSecurityKey(key);
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
@@ -118,14 +121,12 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
 
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, IEnumerable<Claim> claims)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-
             var tokenOptions = new JwtSecurityToken
             (
-                issuer: jwtSettings["validIssuer"],
-                audience: jwtSettings["validAudience"],
+                issuer: _jwtConfiguration.ValidIssuer,
+                audience: _jwtConfiguration.ValidAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtConfiguration.Expires)),
                 signingCredentials: signingCredentials
             );
 
@@ -142,9 +143,6 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-            var secretKey = _configuration["JwtSecret"];
-
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -152,9 +150,9 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
                 ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
 
-                ValidIssuer = jwtSettings["validIssuer"],
-                ValidAudience = jwtSettings["validAudience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!))
+                ValidIssuer = _jwtConfiguration.ValidIssuer,
+                ValidAudience = _jwtConfiguration.ValidAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.JwtSecret!))
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

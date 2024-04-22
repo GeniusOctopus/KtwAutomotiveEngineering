@@ -1,4 +1,5 @@
 ﻿using KtwAutomotiveEngineering.DataAccess;
+using KtwAutomotiveEngineering.Entities.ConfigurationModels;
 using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service;
 using KtwAutomotiveEngineering.Service.Contracts;
@@ -33,8 +34,8 @@ namespace KtwAutomotiveEngineering.Extensions
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwtSettings = configuration.GetSection("JwtSettings");
-            var secretKey = configuration.GetValue<string>("JwtSecret");
+            var jwtConfiguration = new JwtConfiguration();
+            configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
 
             services.AddAuthentication(opt =>
             {
@@ -50,11 +51,14 @@ namespace KtwAutomotiveEngineering.Extensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = jwtSettings["validIssuer"],
-                    ValidAudience = jwtSettings["validAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                    ValidIssuer = jwtConfiguration.ValidIssuer,
+                    ValidAudience = jwtConfiguration.ValidAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.JwtSecret!))
                 };
             });
         }
+
+        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration) =>
+            services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
     }
 }
