@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KtwAutomotiveEngineering.Api.V1.Controllers.Identity
 {
+    [ApiController]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/v{version:apiversion}/[controller]")]
     public class TokenController(IServiceManager service) : ControllerBase
     {
