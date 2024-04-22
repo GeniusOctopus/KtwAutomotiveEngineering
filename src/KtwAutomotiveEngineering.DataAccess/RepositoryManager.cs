@@ -7,5 +7,6 @@ namespace KtwAutomotiveEngineering.DataAccess
         private readonly RepositoryContext _repositoryContext = repositoryContext;
 
         public void Save() => _repositoryContext.SaveChanges();
+        public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
     }
 }

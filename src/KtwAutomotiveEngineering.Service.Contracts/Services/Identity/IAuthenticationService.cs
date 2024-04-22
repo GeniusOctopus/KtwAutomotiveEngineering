@@ -5,6 +5,6 @@ namespace KtwAutomotiveEngineering.Service.Contracts.Services.Identity
 {
     public interface IAuthenticationService
     {
-        Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
+        Task<IdentityResult> RegisterUserAsync(UserForRegistrationDto userForRegistration);
     }
 }

@@ -3,5 +3,6 @@
     public interface IRepositoryManager
     {
         void Save();
+        Task SaveAsync();
     }
 }

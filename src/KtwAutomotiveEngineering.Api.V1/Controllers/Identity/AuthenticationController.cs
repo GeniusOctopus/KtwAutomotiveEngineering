@@ -13,7 +13,7 @@ namespace KtwAutomotiveEngineering.Api.V1.Controllers.Identity
         [HttpPost]
         public async Task<IActionResult> RegiserUser([FromBody] UserForRegistrationDto userForRegistration)
         {
-            var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
+            var result = await _service.AuthenticationService.RegisterUserAsync(userForRegistration);
 
             if (!result.Succeeded)
             {

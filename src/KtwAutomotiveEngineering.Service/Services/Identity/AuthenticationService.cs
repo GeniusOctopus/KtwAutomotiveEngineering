@@ -15,7 +15,7 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
         private readonly IConfiguration _configuration = configuration;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
+        public async Task<IdentityResult> RegisterUserAsync(UserForRegistrationDto userForRegistration)
         {
             var appUser = _mapper.Map<AppUser>(userForRegistration);
 
