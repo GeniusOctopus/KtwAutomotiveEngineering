@@ -1,10 +1,12 @@
 using KtwAutomotiveEngineering.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KtwAutomotiveEngineering.Api.V1.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiversion}/[controller]")]
+    [Authorize]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

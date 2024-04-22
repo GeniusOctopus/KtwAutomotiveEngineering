@@ -70,6 +70,7 @@ namespace KtwAutomotiveEngineering
 
             builder.Services.AddOpenApiDocument();
             builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
             builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.ConfigureServiceManager();
@@ -104,6 +105,9 @@ namespace KtwAutomotiveEngineering
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
             app.MapFallbackToFile("index.html");
