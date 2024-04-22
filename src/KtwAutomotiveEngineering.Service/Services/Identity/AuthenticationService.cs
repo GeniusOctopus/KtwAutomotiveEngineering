@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KtwAutomotiveEngineering.Entities.Exceptions;
 using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service.Contracts.Services.Identity;
 using KtwAutomotiveEngineering.V1.Shared.Dto.Identity;
@@ -76,6 +77,21 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
             return new TokenDto(accessToken, refreshToken);
         }
 
+        public async Task<TokenDto> RefreshTokenAsync(TokenDto tokenDto)
+        {
+            var principal = GetPrincipalFromExpiredToken(tokenDto.AccessToken);
+
+            var user = await _userManager.FindByNameAsync(principal.Identity!.Name!);
+            if (user == null || user.RefreshToken != tokenDto.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            {
+                throw new RefreshTokenBadRequest();
+            }
+
+            _user = user;
+
+            return await CreateTokenAsync(populateExp: false);
+        }
+
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_configuration["JwtSecret"]!);
@@ -133,7 +149,7 @@ namespace KtwAutomotiveEngineering.Service.Services.Identity
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
 
                 ValidIssuer = jwtSettings["validIssuer"],

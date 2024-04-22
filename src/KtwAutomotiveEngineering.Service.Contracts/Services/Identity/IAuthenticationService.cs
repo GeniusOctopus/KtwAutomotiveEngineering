@@ -8,5 +8,6 @@ namespace KtwAutomotiveEngineering.Service.Contracts.Services.Identity
         Task<IdentityResult> RegisterUserAsync(UserForRegistrationDto userForRegistration);
         Task<bool> ValidateUserAsync(UserForAuthenticationDto userForAuth);
         Task<TokenDto> CreateTokenAsync(bool populateExp);
+        Task<TokenDto> RefreshTokenAsync(TokenDto tokenDto);
     }
 }
