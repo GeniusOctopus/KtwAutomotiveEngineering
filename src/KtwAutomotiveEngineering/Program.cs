@@ -74,6 +74,7 @@ namespace KtwAutomotiveEngineering
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureIdentity();
+            builder.Services.ConfigureJWT(builder.Configuration);
 
             var app = builder.Build();
 
