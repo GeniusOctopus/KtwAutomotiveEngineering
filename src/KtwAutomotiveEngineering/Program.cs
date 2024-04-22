@@ -64,6 +64,7 @@ namespace KtwAutomotiveEngineering
 
             builder.Services.AddOpenApiDocument();
             builder.Services.AddAuthentication();
+            builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureIdentity();
 
