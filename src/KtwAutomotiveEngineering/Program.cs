@@ -69,13 +69,13 @@ namespace KtwAutomotiveEngineering
             builder.Services.AddOpenApiDocument();
             builder.Services.AddAuthentication();
             builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureIdentity();
 
             var app = builder.Build();
 
-            var logger = app.Services.GetRequiredService<ILogger>();
-            app.ConfigureExceptionHandler(logger);
+            app.UseExceptionHandler(opt => { });
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
