@@ -1,10 +1,12 @@
-﻿using KtwAutomotiveEngineering.Service.Contracts;
+﻿using KtwAutomotiveEngineering.Api.V1.ActionFilters;
+using KtwAutomotiveEngineering.Service.Contracts;
 using KtwAutomotiveEngineering.V1.Shared.Dto.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KtwAutomotiveEngineering.Api.V1.Controllers.Identity
 {
     [ApiController]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/v{version:apiversion}/[controller]")]
     public class AuthenticationController(IServiceManager service) : ControllerBase
     {

@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
+using KtwAutomotiveEngineering.Api.V1.ActionFilters;
 using KtwAutomotiveEngineering.DataAccess;
 using KtwAutomotiveEngineering.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace KtwAutomotiveEngineering
                 }
             });
 
+            builder.Services.AddScoped<ValidationFilterAttribute>();
             builder.Services.AddControllers();
 
             builder.Services
