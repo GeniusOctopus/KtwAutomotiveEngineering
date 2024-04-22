@@ -2,7 +2,11 @@ using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using KtwAutomotiveEngineering.DataAccess;
 using KtwAutomotiveEngineering.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
 
@@ -69,6 +73,9 @@ namespace KtwAutomotiveEngineering
             builder.Services.ConfigureIdentity();
 
             var app = builder.Build();
+
+            var logger = app.Services.GetRequiredService<ILogger>();
+            app.ConfigureExceptionHandler(logger);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

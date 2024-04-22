@@ -3,6 +3,7 @@ using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service;
 using KtwAutomotiveEngineering.Service.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KtwAutomotiveEngineering.Extensions
 {
