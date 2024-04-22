@@ -1,5 +1,7 @@
 ﻿using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service.Contracts;
+using KtwAutomotiveEngineering.Service.Contracts.Services.Identity;
+using KtwAutomotiveEngineering.Service.Services.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 

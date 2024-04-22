@@ -1,21 +1,15 @@
 ﻿using KtwAutomotiveEngineering.Entities.Models.Identity;
-using KtwAutomotiveEngineering.Service.Contracts;
+using KtwAutomotiveEngineering.Service.Contracts.Services.Identity;
 using KtwAutomotiveEngineering.V1.Shared.Dto.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
-namespace KtwAutomotiveEngineering.Service
+namespace KtwAutomotiveEngineering.Service.Services.Identity
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService(UserManager<AppUser> userManager, IConfiguration configuration) : IAuthenticationService
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IConfiguration _configuration;
-
-        public AuthenticationService(UserManager<AppUser> userManager, IConfiguration configuration)
-        {
-            _userManager = userManager;
-            _configuration = configuration;
-        }
+        private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly IConfiguration _configuration = configuration;
 
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
         {

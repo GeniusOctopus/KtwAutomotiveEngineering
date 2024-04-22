@@ -4,12 +4,9 @@ using System.Linq.Expressions;
 
 namespace KtwAutomotiveEngineering.DataAccess.Repositories
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T>(RepositoryContext repositoryContext) : IRepositoryBase<T> where T : class
     {
-        protected RepositoryContext RepositoryContext;
-
-        public RepositoryBase(RepositoryContext repositoryContext)
-            => RepositoryContext = repositoryContext;
+        protected RepositoryContext RepositoryContext = repositoryContext;
 
         public IQueryable<T> FindAll(bool trackChanges) =>
             !trackChanges ?

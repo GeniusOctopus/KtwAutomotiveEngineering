@@ -2,6 +2,6 @@
 {
     public interface IRepositoryManager
     {
-        
+        void Save();
     }
 }
