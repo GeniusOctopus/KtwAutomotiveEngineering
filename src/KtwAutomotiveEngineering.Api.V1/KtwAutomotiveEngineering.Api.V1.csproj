@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\KtwAutomotiveEngineering.Entities\KtwAutomotiveEngineering.Entities.csproj" />
 		<ProjectReference Include="..\KtwAutomotiveEngineering.Service.Contracts\KtwAutomotiveEngineering.Service.Contracts.csproj" />
 		<ProjectReference Include="..\KtwAutomotiveEngineering.V1.Shared\KtwAutomotiveEngineering.V1.Shared.csproj" />
 	</ItemGroup>
