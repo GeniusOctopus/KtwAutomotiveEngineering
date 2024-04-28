@@ -27,7 +27,7 @@ namespace KtwAutomotiveEngineering
                 {
                     StatusCode = httpContext.Response.StatusCode,
                     Message = "Internal Server Error.",
-                }.ToString());
+                }.ToString(), cancellationToken: cancellationToken);
             }
 
             return true;

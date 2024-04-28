@@ -20,7 +20,7 @@ namespace KtwAutomotiveEngineering.Api.V1.Controllers
                 {
                     Message = ((ApiBadRequestResponse)baseResponse).Message,
                     StatusCode = StatusCodes.Status400BadRequest
-                })
+                }),
                 _ => throw new NotImplementedException()
             };
         }
