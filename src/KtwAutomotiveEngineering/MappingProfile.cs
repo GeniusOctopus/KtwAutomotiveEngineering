@@ -15,6 +15,8 @@ namespace KtwAutomotiveEngineering
             CreateMap<WorkDay, WorkDayDto>();
             CreateMap<WorkTaskForCreationDto, WorkTask>();
             CreateMap<WorkTask, WorkTaskDto>();
+            CreateMap<WorkSliceForCreationDto, WorkSlice>();
+            CreateMap<WorkSlice, WorkSliceDto>();
         }
     }
 }

@@ -4,6 +4,7 @@ namespace KtwAutomotiveEngineering.Contracts
 {
     public interface IWorkTaskRepository
     {
+        Task<WorkTask?> GetWorkTaskAsync(Guid workTaskId, bool trackChanges);
         Task<IEnumerable<WorkTask>> GetWorkTasks(Guid workDayId, bool trackChanges);
         void CreateWorkTaskForWorkDay(Guid workDayId, WorkTask workTasks);
     }

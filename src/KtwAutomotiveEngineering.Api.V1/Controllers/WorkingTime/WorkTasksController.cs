@@ -10,7 +10,7 @@ namespace KtwAutomotiveEngineering.Api.V1.Controllers.WorkingTime
     {
         private readonly IServiceManager _service = service;
 
-        [HttpGet]
+        [HttpGet(Name = "GetWorkTaskForWorkDay")]
         public async Task<IActionResult> GetWorkTasksForWorkDay(Guid workDayId)
         {
             var workTasks = await _service.WorkTaskService.GetWorkTasksAsync(workDayId, trackChanges: false);
