@@ -15,13 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Blazor", "src\KtwAutomotiveEngineering.Blazor\KtwAutomotiveEngineering.Blazor.csproj", "{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Entities", "src\KtwAutomotiveEngineering.Entities\KtwAutomotiveEngineering.Entities.csproj", "{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Entities", "src\KtwAutomotiveEngineering.Entities\KtwAutomotiveEngineering.Entities.csproj", "{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Service", "src\KtwAutomotiveEngineering.Service\KtwAutomotiveEngineering.Service.csproj", "{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Service", "src\KtwAutomotiveEngineering.Service\KtwAutomotiveEngineering.Service.csproj", "{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Service.Contracts", "src\KtwAutomotiveEngineering.Service.Contracts\KtwAutomotiveEngineering.Service.Contracts.csproj", "{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Service.Contracts", "src\KtwAutomotiveEngineering.Service.Contracts\KtwAutomotiveEngineering.Service.Contracts.csproj", "{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Contracts", "src\KtwAutomotiveEngineering.Contracts\KtwAutomotiveEngineering.Contracts.csproj", "{EB295927-1FCF-46C5-A798-F2D77128F102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Contracts", "src\KtwAutomotiveEngineering.Contracts\KtwAutomotiveEngineering.Contracts.csproj", "{EB295927-1FCF-46C5-A798-F2D77128F102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
