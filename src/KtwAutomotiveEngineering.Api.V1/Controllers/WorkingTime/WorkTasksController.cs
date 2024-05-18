@@ -5,10 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace KtwAutomotiveEngineering.Api.V1.Controllers.WorkingTime
 {
     [ApiController]
-    [Route("api/v{version:apiversion}/[controller]")]
-    public class WorkTaskController(IServiceManager service) : ApiControllerBase
+    [Route("api/v{version:apiversion}/workday/{workDayId}/[controller]")]
+    public class WorkTasksController(IServiceManager service) : ApiControllerBase
     {
         private readonly IServiceManager _service = service;
+
+        [HttpGet]
+        public async Task<IActionResult> GetWorkTasksForWorkDay(Guid workDayId)
+        {
+            var workTasks = await _service.WorkTaskService.GetWorkTasksAsync(workDayId, trackChanges: false);
+
+            return Ok(workTasks);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateWorkTaskForWorkDay(Guid workDayId, [FromBody] WorkTaskForCreationDto workTask)

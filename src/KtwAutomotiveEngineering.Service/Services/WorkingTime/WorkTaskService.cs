@@ -14,6 +14,18 @@ namespace KtwAutomotiveEngineering.Service.Services.WorkingTime
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
 
+        public async Task<IEnumerable<WorkTaskDto>> GetWorkTasksAsync(Guid workDayId, bool trackChanges)
+        {
+            var workDay = await _repository.WorkDay.GetWorkDayAsync(workDayId, trackChanges);
+            if (workDay is null)
+                throw new WorkDayNotFoundException(workDayId);
+
+            var workTasksFromDb = await _repository.WorkTask.GetWorkTasks(workDayId, trackChanges);
+
+            var workTasksDto = _mapper.Map<IEnumerable<WorkTaskDto>>(workTasksFromDb);
+            return workTasksDto;
+        }
+
         public async Task<WorkTaskDto> CreateWorkTaskForWorkDay(Guid workDayId, WorkTaskForCreationDto workTaskForCreation, bool trackChanges)
         {
             var workDay = await _repository.WorkDay.GetWorkDayAsync(workDayId, trackChanges);
