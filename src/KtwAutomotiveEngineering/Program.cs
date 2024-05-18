@@ -4,6 +4,7 @@ using KtwAutomotiveEngineering.Api.V1.ActionFilters;
 using KtwAutomotiveEngineering.DataAccess;
 using KtwAutomotiveEngineering.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,7 @@ namespace KtwAutomotiveEngineering
             });
 
             builder.Services.AddScoped<ValidationFilterAttribute>();
+            builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
             builder.Services.AddControllers();
 
             builder.Services
@@ -73,6 +75,7 @@ namespace KtwAutomotiveEngineering
             builder.Services.AddAuthorization();
             builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureIdentity();
             builder.Services.ConfigureJWT(builder.Configuration);

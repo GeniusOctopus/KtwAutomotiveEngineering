@@ -22,8 +22,8 @@ namespace KtwAutomotiveEngineering.Service
                                 IOptions<JwtConfiguration> jwtConfiguration) : IServiceManager
     {
         private readonly Lazy<IAuthenticationService> _authenticationService = new(() => new AuthenticationService(userManager, configuration, mapper, logger, jwtConfiguration));
-        private readonly Lazy<IWorkDayService> _workDayService = new(() => new WorkDayService(repositoryManager, logger));
-        private readonly Lazy<IWorkTaskService> _workTaskService = new(() => new WorkTaskService(repositoryManager, logger));
+        private readonly Lazy<IWorkDayService> _workDayService = new(() => new WorkDayService(repositoryManager, logger, mapper));
+        private readonly Lazy<IWorkTaskService> _workTaskService = new(() => new WorkTaskService(repositoryManager, logger, mapper));
         private readonly Lazy<IWorkSliceService> _workSliceService = new(() => new WorkSliceService(repositoryManager, logger));
 
         public IAuthenticationService AuthenticationService => _authenticationService.Value;

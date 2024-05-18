@@ -1,4 +1,5 @@
-﻿using KtwAutomotiveEngineering.DataAccess;
+﻿using KtwAutomotiveEngineering.Contracts;
+using KtwAutomotiveEngineering.DataAccess;
 using KtwAutomotiveEngineering.Entities.ConfigurationModels;
 using KtwAutomotiveEngineering.Entities.Models.Identity;
 using KtwAutomotiveEngineering.Service;
@@ -14,6 +15,9 @@ namespace KtwAutomotiveEngineering.Extensions
 {
     public static class ServiceExtensions
     {
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
 
