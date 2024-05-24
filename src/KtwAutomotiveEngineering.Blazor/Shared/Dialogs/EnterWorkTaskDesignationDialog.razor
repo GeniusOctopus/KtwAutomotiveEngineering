@@ -1,0 +1,30 @@
+﻿@using KtwAutomotiveEngineering.Blazor.Shared.Dialogs.ResultModels
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            Aufgabe hinzufügen
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="Description" Label="Beschreibung" />
+        <MudTextField @bind-Value="Customer" Label="Kunde" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Error" OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton Color="Color.Success" OnClick="Submit">Hinzufügen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    public string? Description { get; set; }
+    public string? Customer { get; set; }
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Submit()
+        => MudDialog.Close(DialogResult.Ok(
+            new EnterWorkTaskDesignationDialogResult(Description, Customer))
+        );
+}
