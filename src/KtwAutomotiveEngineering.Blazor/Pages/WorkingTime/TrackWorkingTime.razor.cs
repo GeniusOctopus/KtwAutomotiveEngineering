@@ -36,7 +36,13 @@ namespace KtwAutomotiveEngineering.Blazor.Pages.WorkingTime
                 }]
             };
 
-            var dialog = await DialogService.ShowAsync<EnterWorkTaskDesignationDialog>();
+            var dialogOptions = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                CloseButton = true,
+            };
+
+            var dialog = await DialogService.ShowAsync<EnterWorkTaskDesignationDialog>(string.Empty, dialogOptions);
             var result = await dialog.Result;
 
             if (!result.Canceled)

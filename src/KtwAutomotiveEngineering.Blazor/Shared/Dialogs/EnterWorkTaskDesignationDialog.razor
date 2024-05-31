@@ -1,17 +1,17 @@
 ﻿@using KtwAutomotiveEngineering.Blazor.Shared.Dialogs.ResultModels
-<MudDialog>
+<MudDialog DefaultFocus="DefaultFocus.FirstChild">
     <TitleContent>
         <MudText Typo="Typo.h6">
-            Aufgabe hinzufügen
+            Neue Aufgabe
         </MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField @bind-Value="Description" Label="Beschreibung" />
-        <MudTextField @bind-Value="Customer" Label="Kunde" />
+        <MudTextField @bind-Value="Description" Label="Beschreibung" OnKeyUp="OnKeyUp" />
+        <MudTextField @bind-Value="Customer" Label="Kunde" OnKeyUp="OnKeyUp" />
     </DialogContent>
     <DialogActions>
         <MudButton Variant="Variant.Text" Color="Color.Error" OnClick="Cancel">Abbrechen</MudButton>
-        <MudButton Color="Color.Success" OnClick="Submit">Hinzufügen</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="Submit">Hinzufügen</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -20,6 +20,12 @@
     public string? Customer { get; set; }
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private void OnKeyUp(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+            Submit();
+    }
 
     private void Cancel() => MudDialog.Cancel();
 
