@@ -1,0 +1,120 @@
+﻿@page "/finance/create-invoice"
+
+<MudGrid Style="margin-top: 1rem;">
+    <MudItem xs="4">
+        <MudSelect T="string" Label="Briefkopf" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" SelectedValues="@(new[] { "Raumgestaltung" })">
+            <MudSelectItem T="string" Value="@("Raumgestaltung")">Raumgestaltung</MudSelectItem>
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="8"></MudItem>
+
+    <MudItem xs="2">
+        <MudSelect T="string" Label="Anrede" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense">
+            <MudSelectItem T="string">Herr</MudSelectItem>
+            <MudSelectItem T="string">Frau</MudSelectItem>
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="4">
+        <MudTextField T="string" Label="Nachname" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="4">
+        <MudTextField T="string" Label="Vorname" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="2"></MudItem>
+
+    <MudItem xs="3">
+        <MudTextField T="string" Label="Straße" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="1">
+        <MudTextField T="string" Label="Hausnummer" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="2">
+        <MudTextField T="string" Label="PLZ" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="3">
+        <MudTextField T="string" Label="Ort" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="3"></MudItem>
+
+    <MudItem xs="12">
+        <MudTable Items="@InvoicePositions" Dense Breakpoint="Breakpoint.Sm" Striped Bordered
+                  CustomHeader CustomFooter HeaderClass="table-head-bordered" FooterClass="table-foot-bordered">
+            <HeaderContent>
+                <MudTHeadRow IgnoreCheckbox Class="header-centered">
+                    <MudTh colspan="6"><MudText Typo="Typo.h6">Rechnungspositionen</MudText></MudTh>
+                </MudTHeadRow>
+                <MudTHeadRow>
+                    <MudTh Style="max-width: 30px;">Kz</MudTh>
+                    <MudTh>Anz</MudTh>
+                    <MudTh>ME</MudTh>
+                    <MudTh>Bezeichnung</MudTh>
+                    <MudTh Style="max-width: 40px;">Einzelpreis</MudTh>
+                    <MudTh Style="max-width: 40px;">Gesamt</MudTh>
+                </MudTHeadRow>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Invoice position type" Style="max-width: 30px;">
+                    <MudSelect @bind-Value="context.InvoicePositionType" Margin="Margin.Dense">
+                        <MudSelectItem Value="InvoicePositionType.Material">M</MudSelectItem>
+                        <MudSelectItem Value="InvoicePositionType.Service">L</MudSelectItem>
+                    </MudSelect>
+                </MudTd>
+                <MudTd DataLabel="Amount" Style="max-width: 30px;">
+                    <MudNumericField @bind-Value="context.Amount" HideSpinButtons Margin="Margin.Dense" />
+                </MudTd>
+                <MudTd DataLabel="Unit of measurement" Style="max-width: 25px;">
+                    <MudTextField @bind-Value="context.UnitOfMeasurement" Margin="Margin.Dense" />
+                </MudTd>
+                <MudTd DataLabel="Description">
+                    <MudTextField @bind-Value="context.Description" Margin="Margin.Dense" />
+                </MudTd>
+                <MudTd DataLabel="Price per unit" Style="max-width: 40px;">
+                    <MudNumericField @bind-Value="context.PricePerUnit" HideSpinButtons Margin="Margin.Dense" Format="C2" />
+                </MudTd>
+                <MudTd DataLabel="Position price" Style="max-width: 40px;">
+                    <MudNumericField Value="@(context.Amount * context.PricePerUnit)" HideSpinButtons Margin="Margin.Dense" Format="C2" />
+                </MudTd>
+            </RowTemplate>
+            <FooterContent>
+                <MudTFootRow>
+                    <MudTd colspan="4"></MudTd>
+                    <MudTd Style="max-width: 40px;"><MudText Typo="Typo.body2">Summe:</MudText></MudTd>
+                    <MudTd Style="max-width: 40px;">@(InvoicePositions.Sum(x => x.Amount * x.PricePerUnit).ToString("C2"))</MudTd>
+                </MudTFootRow>
+                <MudTFootRow>
+                    <MudTd colspan="4"></MudTd>
+                    <MudTd Style="max-width: 40px;"><MudText Typo="Typo.body2">inkl. 19% Mwst.</MudText></MudTd>
+                    <MudTd Style="max-width: 40px;">@((InvoicePositions.Sum(x => x.Amount * x.PricePerUnit) * 1.19m).ToString("C2"))</MudTd>
+                </MudTFootRow>
+                <MudTFootRow id="add-invoice-position-button" OnRowClick="OnAddRowClicked">
+                    <MudTd colspan="6"><MudStack Row Justify="Justify.Center"><MudIcon Icon="@Icons.Material.Filled.Add" /> <MudText Typo="Typo.body1">Position hinzufügen</MudText></MudStack></MudTd>
+                </MudTFootRow>
+            </FooterContent>
+        </MudTable>
+    </MudItem>
+</MudGrid>
+
+@code {
+    public enum InvoicePositionType
+    {
+        Material,
+        Service
+    }
+
+    public class InvoicePosition(InvoicePositionType invoicePositionType, int amount, string unitOfMeasurement, string description, decimal pricePerUnit)
+    {
+        public InvoicePositionType InvoicePositionType { get; set; } = invoicePositionType;
+        public int Amount { get; set; } = amount;
+        public string UnitOfMeasurement { get; set; } = unitOfMeasurement;
+        public string Description { get; set; } = description;
+        public decimal PricePerUnit { get; set; } = pricePerUnit;
+        public decimal PositionPrice { get; set; } = 0.0m;
+    }
+
+    public List<InvoicePosition> InvoicePositions { get; set; } = [new(InvoicePositionType.Material, 2, "St", "Schlüpfergummi", 0.50m), new(InvoicePositionType.Material, 10, "St", "Befestigungshäkchen Scheibengardine selbstklebend", 0.05m)];
+
+    private void OnAddRowClicked(MouseEventArgs args)
+    {
+        InvoicePositions.Add(new(InvoicePositionType.Material, 0, string.Empty, string.Empty, decimal.Zero));
+    }
+}

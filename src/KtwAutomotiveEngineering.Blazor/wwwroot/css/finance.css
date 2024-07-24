@@ -1,0 +1,7 @@
+﻿#add-invoice-position-button {
+    cursor: pointer;
+}
+
+    #add-invoice-position-button:hover {
+        background-color: var(--mud-palette-table-hover);
+    }
