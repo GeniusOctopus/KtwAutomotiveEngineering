@@ -1,7 +1,15 @@
 ﻿#add-invoice-position-button {
-    cursor: pointer;
+    border: dashed;
+    border-width: 1px;
+    border-color: black;
 }
 
     #add-invoice-position-button:hover {
-        background-color: var(--mud-palette-table-hover);
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
     }
+
+        #add-invoice-position-button:hover td {
+            background-color: #F5F5F5;
+        }
