@@ -6,7 +6,7 @@ namespace KtwAutomotiveEngineering.Blazor
     {
         internal static MudTheme StandardTheme = new()
         {
-            Palette = new PaletteLight
+            PaletteLight = new PaletteLight
             {
                 AppbarBackground = "#20ad3c",
                 AppbarText = "#041608",
