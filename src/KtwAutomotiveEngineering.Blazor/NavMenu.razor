@@ -1,0 +1,11 @@
+﻿@using MudBlazor
+<MudNavMenu>
+    <MudNavLink Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+    <MudNavGroup Title="Arbeitszeit" Expanded="true">
+        <MudNavLink Href="/working-time/track"  Match="NavLinkMatch.All">Erfassen</MudNavLink>
+        <MudNavLink Href="/working-time/analyse"  Match="NavLinkMatch.All">Auswerten</MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Title="Buchhaltung">
+        <MudNavLink Href="/finance/create-invoice" Match="NavLinkMatch.All">Rechnung</MudNavLink>
+    </MudNavGroup>
+</MudNavMenu>

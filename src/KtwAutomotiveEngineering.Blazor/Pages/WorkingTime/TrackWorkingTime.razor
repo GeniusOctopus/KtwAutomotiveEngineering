@@ -1,0 +1,78 @@
+﻿@page "/working-time/track"
+
+<MudGrid>
+    <MudItem xs="2" Class="mt-10"></MudItem>
+    <MudItem xs="8" Class="mt-10">
+        <MudText Typo="Typo.h4" Align="Align.Center">Arbeitszeit: @_time.ToString(@"hh\:mm\:ss")</MudText>
+    </MudItem>
+    <MudItem xs="2" Class="mt-10"></MudItem>
+    <MudItem xs="12">
+        <MudTable Striped="true" Items="_currentWorkDay.WorkTasks" Hover="true" Loading="_loading" Dense="true" @ref="_table">
+            <HeaderContent>
+                <MudTh><MudText Typo="Typo.h5">#</MudText></MudTh>
+                <MudTh><MudText Typo="Typo.h5">Beschreibung</MudText></MudTh>
+                <MudTh><MudText Typo="Typo.h5">Kunde</MudText></MudTh>
+                <MudTh><MudText Typo="Typo.h5"></MudText></MudTh>
+                <MudTh><MudText Typo="Typo.h5"></MudText></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="#">
+                    @(_currentWorkDay.WorkTasks?.ToList().IndexOf(context) + 1)
+                    @if (_currentWorkDay.WorkTasks?.Count > 1 && !context.IsPause)
+                    {
+                        <MudIconButton Disabled="_currentWorkDay.IsDone" Icon="@Icons.Material.Filled.PlayArrow" Color="Color.Success"></MudIconButton>
+                    }
+                </MudTd>
+                <MudTd DataLabel="Beschreibung"><MudText Typo="Typo.h6">@context.Description</MudText></MudTd>
+                <MudTd DataLabel="Kommentar"><MudTextField @bind-Value="@context.Customer" /></MudTd>
+                <MudTd></MudTd>
+                <MudTd></MudTd>
+            </RowTemplate>
+            <ChildRowContent>
+                <MudTr>
+                    <MudTh><MudText Typo="Typo.h6">#</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.h6">Start</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.h6">Ende</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.h6">Dauer</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.h6"></MudText></MudTh>
+                </MudTr>
+                @foreach (var slice in context.WorkSlices)
+                {
+                    <MudTr>
+                        <MudTd></MudTd>
+                        <MudTd DataLabel="Start">@slice.Start.ToLongTimeString()</MudTd>
+                        <MudTd DataLabel="Ende">@slice.End?.ToLongTimeString()</MudTd>
+                        @* <MudTd DataLabel="Dauer">@slice.Duration.ToString(@"hh\:mm\:ss")</MudTd> *@
+                        <MudTd></MudTd>
+                    </MudTr>
+                }
+                @if (context.WorkSlices?.Count > 0)
+                {
+                    <MudTr>
+                        <MudTd>Summe</MudTd>
+                        <MudTd></MudTd>
+                        <MudTd></MudTd>
+                        @* <MudTd DataLabel="Dauer">@((new TimeSpan(context.WorkSlices.Sum(x => x.Duration.Ticks))).ToString(@"hh\:mm\:ss"))</MudTd> *@
+                        <MudTd></MudTd>
+                    </MudTr>
+                }
+            </ChildRowContent>
+        </MudTable>
+    </MudItem>
+    <MudItem xs="2" Class="mt-10"></MudItem>
+    <MudItem xs="8" Class="mt-10">
+        <MudStack Row Justify="Justify.Center" Spacing="10">
+            <MudButton Style="width: 150px;" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large">Aufgabe</MudButton>
+            <MudButton Style="width: 150px;" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large">Pause</MudButton>
+            @if (_workDayHasStarted)
+            {
+                <MudButton Style="width: 150px;" Variant="Variant.Filled" Color="Color.Error" Size="Size.Large" OnClick="StopWorkDay">Gehen</MudButton>
+            }
+            else
+            {
+                <MudButton Style="width: 150px;" Variant="Variant.Filled" Color="Color.Success" Size="Size.Large" OnClick="StartWorkDay">Kommen</MudButton>
+            }
+        </MudStack>
+    </MudItem>
+    <MudItem xs="2" Class="mt-10"></MudItem>
+</MudGrid>

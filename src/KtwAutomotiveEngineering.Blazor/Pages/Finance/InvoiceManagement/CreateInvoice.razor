@@ -1,0 +1,160 @@
+﻿@page "/finance/create-invoice"
+@using KtwAutomotiveEngineering.V1.Shared.Enums
+@using KtwAutomotiveEngineering.V1.Shared.Enums.Finance.Invoice
+@using KtwAutomotiveEngineering.V1.Shared.Utils.Extensions
+
+<MudGrid Style="margin-top: 1rem;">
+    <MudItem xs="4">
+        <MudSelect T="string" Label="Briefkopf" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" SelectedValues="@(new[] { "Raumgestaltung" })">
+            <MudSelectItem T="string" Value="@("Raumgestaltung")">Raumgestaltung</MudSelectItem>
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="8"></MudItem>
+
+    <MudItem xs="2">
+        <MudAutocomplete @bind-Value="Invoice.Head.Salutation"
+                         Label="Anrede"
+                         ShrinkLabel
+                         SearchFunc="@((x, ct) => Task.FromResult(Enumerable.AsEnumerable<string>(string.IsNullOrEmpty(x) ? ["Herr", "Frau"] : [x, "Herr", "Frau"]).Distinct()))"
+                         Immediate="true"
+                         CoerceValue="true"
+                         CoerceText="false"
+                         SelectValueOnTab="true"
+                         Variant="Variant.Outlined"
+                         Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="4">
+        <MudTextField @bind-Value="Invoice.Head.Lastname" Label="Nachname" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="4">
+        <MudTextField @bind-Value="Invoice.Head.Firstname" Label="Vorname" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="2"></MudItem>
+
+    <MudItem xs="3">
+        <MudTextField @bind-Value="Invoice.Head.Address.Street" Label="Straße" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="1">
+        <MudTextField @bind-Value="Invoice.Head.Address.HouseNumber" Label="Hs.-Nr." ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="2">
+        <MudTextField @bind-Value="Invoice.Head.Address.PostalCode" Label="PLZ" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="4">
+        <MudTextField @bind-Value="Invoice.Head.Address.City" Label="Ort" ShrinkLabel Variant="Variant.Outlined" Margin="Margin.Dense" />
+    </MudItem>
+    <MudItem xs="2"></MudItem>
+
+    <MudItem xs="12">
+        <MudTable Items="Invoice.Positions" Dense="true" Breakpoint="Breakpoint.Sm" Striped="true" Bordered="true"
+                  CustomHeader="true" HeaderClass="table-head-bordered" Hover="true" FixedHeader="true" Height="60vh" RowsPerPage="int.MaxValue"
+                  FooterClass="table-foot-bordered" CustomFooter="true" FixedFooter="true">
+            <HeaderContent>
+                <MudTHeadRow IgnoreCheckbox Class="header-centered">
+                    <MudTh colspan="7"><MudText Typo="Typo.body1">Rechnungspositionen</MudText></MudTh>
+                </MudTHeadRow>
+                <MudTHeadRow>
+                    <MudTh Style="max-width: 30px;"><MudTooltip Text="Kennzeichen Material [M]/ Leistung [L]">Kz</MudTooltip></MudTh>
+                    <MudTh Style="max-width: 30px;"><MudTooltip Text="Anzahl">Anz</MudTooltip></MudTh>
+                    <MudTh Style="max-width: 25px;"><MudTooltip Text="Mengeneinheit">ME</MudTooltip></MudTh>
+                    <MudTh>Bezeichnung</MudTh>
+                    <MudTh Style="max-width: 60px; white-space: nowrap;">Einzelpreis [€]</MudTh>
+                    <MudTh Style="max-width: 50px; white-space: nowrap;">Gesamt [€]</MudTh>
+                    <MudTh Style="max-width: 25px;"></MudTh>
+                </MudTHeadRow>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Invoice position type" Style="max-width: 30px;">
+                    <MudSelect @bind-Value="context.PositionType" Margin="Margin.Dense" Class="ma-1">
+                        <MudSelectItem Value="PositionType.Material" Style="text-align: center;">@EnumExtensions.GetTextRepresentation(PositionType.Material).Text</MudSelectItem>
+                        <MudSelectItem Value="PositionType.Service" Style="text-align: center;">@EnumExtensions.GetTextRepresentation(PositionType.Service).Text</MudSelectItem>
+                    </MudSelect>
+                </MudTd>
+                <MudTd DataLabel="Amount" Style="max-width: 30px;">
+                    <MudNumericField @bind-Value="context.Quantity" HideSpinButtons Margin="Margin.Dense" Format="F2" />
+                </MudTd>
+                <MudTd DataLabel="Unit of measurement" Style="max-width: 25px;">
+                    <MudTextField @bind-Value="context.UnitOfMeasurement" Margin="Margin.Dense" />
+                </MudTd>
+                <MudTd DataLabel="Description">
+                    <MudTextField @bind-Value="context.Description" Margin="Margin.Dense" />
+                </MudTd>
+                <MudTd DataLabel="Price per unit" Style="max-width: 60px;">
+                    <MudNumericField @bind-Value="context.PricePerUnit" HideSpinButtons Margin="Margin.Dense" Format="F2" />
+                </MudTd>
+                <MudTd DataLabel="Position price" Style="max-width: 50px;">
+                    <MudNumericField Value="@(context.Quantity * context.PricePerUnit)" HideSpinButtons Margin="Margin.Dense" Format="F2" ReadOnly="true" />
+                </MudTd>
+                <MudTd DataLabel="Action" Style="max-width: 25px;">
+                    <MudTooltip Text="Position löschen"><MudIconButton OnClick="@(x => RemoveInvoicePosition(context))" Icon="@Icons.Material.Outlined.Delete" Color="Color.Error" Size="Size.Small" Class="mx-auto" Style="display: block;" /></MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <FooterContent>
+                <MudTFootRow>
+                    <MudTd colspan="3" Style="max-width: 85px;">
+                        <MudStack Row Wrap="Wrap.NoWrap" StretchItems="StretchItems.End" Justify="Justify.Center" AlignItems="AlignItems.Center"><MudText Typo="Typo.subtitle2" Style="white-space: nowrap;">Material-Rabatt [%]: </MudText><MudNumericField @bind-Value="Invoice.Head.Discount" Clearable="true" HideSpinButtons Margin="Margin.Dense" Format="F2" /></MudStack>
+                    </MudTd>
+                    <MudTd><MudText Typo="Typo.subtitle2">Material: @(Invoice.CalculateMaterialTotal().ToString("C2")) Leistung: @(Invoice.CalculateServiceTotal().ToString("C2"))</MudText></MudTd>
+                    <MudTd Style="max-width: 60px;">
+                        <MudStack Row Wrap="Wrap.NoWrap" StretchItems="StretchItems.End" Justify="Justify.Center" AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.subtitle2">Preis:</MudText>
+                        <MudTooltip>
+                            <ChildContent>
+                                <MudIcon Icon="@Icons.Material.Filled.Info" />
+                            </ChildContent>
+                            <TooltipContent>
+                                <MudCard Style="width: 200px;">
+                                    <MudCardContent>
+                                        <MudGrid>
+                                            <MudItem xs="6">
+                                                Summe:
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                @(Invoice.CalculateTotalBeforeDiscountAndTaxes().ToString("C2"))
+                                            </MudItem>
+                                            @if(Invoice.Head.Discount is not null)
+                                            {
+                                                <MudItem xs="6">
+                                                    abzgl. @Invoice.Head.Discount?.ToString("F2")% Rabatt
+                                                </MudItem>
+                                                <MudItem xs="6">
+                                                    @(Invoice.CalculateDiscount().ToString("C2"))
+                                                </MudItem>
+                                                <MudItem xs="6">
+                                                    Summe:
+                                                </MudItem>
+                                                <MudItem xs="6">
+                                                    @(Invoice.CalculateTotalAfterDiscountAndBeforeTaxes().ToString("C2"))
+                                                </MudItem>
+                                            }
+                                            <MudItem xs="6">
+                                                zzgl. 19% Mwst.
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                @(Invoice.CalculateTaxes().ToString("C2"))
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                Preis:
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                @(Invoice.CalculateTotal().ToString("C2"))
+                                            </MudItem>
+                                        </MudGrid>
+                                    </MudCardContent>
+                                </MudCard>
+                            </TooltipContent>
+                        </MudTooltip>
+                        </MudStack>
+                    </MudTd>
+                    <MudTd Style="max-width: 50px; white-space: nowrap;">@(Invoice.CalculateTotal().ToString("C2"))</MudTd>
+                    <MudTd Style="max-width: 25px;"></MudTd>
+                </MudTFootRow>
+            </FooterContent>
+            <PagerContent>
+                <MudTFootRow id="add-invoice-position-button" Class="d-block table-head-bordered" OnRowClick="OnAddRowClicked">
+                    <MudTd colspan="7" Class="mud-ripple mud-ripple-icon d-block"><MudStack Row Justify="Justify.Center"><MudIcon Icon="@Icons.Material.Filled.Add" /> <MudText Typo="Typo.body1">Position hinzufügen</MudText></MudStack></MudTd>
+                </MudTFootRow>
+            </PagerContent>
+        </MudTable>
+    </MudItem>
+</MudGrid>

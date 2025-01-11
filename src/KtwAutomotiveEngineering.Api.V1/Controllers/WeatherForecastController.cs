@@ -1,9 +1,12 @@
+using KtwAutomotiveEngineering.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KtwAutomotiveEngineering.Api.V1.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiversion}/[controller]")]
+    [Authorize]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -11,11 +14,8 @@ namespace KtwAutomotiveEngineering.Api.V1.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController()
         {
-            _logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]

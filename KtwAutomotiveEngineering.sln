@@ -3,17 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering", "src\KtwAutomotiveEngineering\KtwAutomotiveEngineering.csproj", "{678FAAF7-3EE5-4EA7-973F-112993070296}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.V1.Shared", "src\KtwAutomotiveEngineering.V1.Shared\KtwAutomotiveEngineering.V1.Shared.csproj", "{A69CC6A1-9346-4331-B678-201FB56709A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Client", "src\KtwAutomotiveEngineering.Client\KtwAutomotiveEngineering.Client.csproj", "{6D0F2DC6-AF8E-4120-B589-56A7CE703328}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.DataAccess", "src\KtwAutomotiveEngineering.DataAccess\KtwAutomotiveEngineering.DataAccess.csproj", "{97CDE067-D860-4200-ACFF-0167361E4BA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Api.V1", "src\KtwAutomotiveEngineering.Api.V1\KtwAutomotiveEngineering.Api.V1.csproj", "{7AD129A8-CF93-485D-B824-F6703EAEF92A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Test", "test\KtwAutomotiveEngineering.Test\KtwAutomotiveEngineering.Test.csproj", "{27EECB3A-5E13-4CC7-92AA-E739097D671C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Shared", "src\KtwAutomotiveEngineering.Shared\KtwAutomotiveEngineering.Shared.csproj", "{A69CC6A1-9346-4331-B678-201FB56709A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Api.V1", "src\KtwAutomotiveEngineering.Api.V1\KtwAutomotiveEngineering.Api.V1.csproj", "{D23742BD-066A-4416-96B3-1B1ABDEF3EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.DataAccess", "src\KtwAutomotiveEngineering.DataAccess\KtwAutomotiveEngineering.DataAccess.csproj", "{97CDE067-D860-4200-ACFF-0167361E4BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering", "src\KtwAutomotiveEngineering\KtwAutomotiveEngineering.csproj", "{4E24F926-0B02-4C49-A7D5-38ABF97CCA19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KtwAutomotiveEngineering.Test", "test\KtwAutomotiveEngineering.Test\KtwAutomotiveEngineering.Test.csproj", "{27EECB3A-5E13-4CC7-92AA-E739097D671C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Blazor", "src\KtwAutomotiveEngineering.Blazor\KtwAutomotiveEngineering.Blazor.csproj", "{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Entities", "src\KtwAutomotiveEngineering.Entities\KtwAutomotiveEngineering.Entities.csproj", "{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Service", "src\KtwAutomotiveEngineering.Service\KtwAutomotiveEngineering.Service.csproj", "{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Service.Contracts", "src\KtwAutomotiveEngineering.Service.Contracts\KtwAutomotiveEngineering.Service.Contracts.csproj", "{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KtwAutomotiveEngineering.Contracts", "src\KtwAutomotiveEngineering.Contracts\KtwAutomotiveEngineering.Contracts.csproj", "{EB295927-1FCF-46C5-A798-F2D77128F102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{678FAAF7-3EE5-4EA7-973F-112993070296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{678FAAF7-3EE5-4EA7-973F-112993070296}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{678FAAF7-3EE5-4EA7-973F-112993070296}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{678FAAF7-3EE5-4EA7-973F-112993070296}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D0F2DC6-AF8E-4120-B589-56A7CE703328}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AD129A8-CF93-485D-B824-F6703EAEF92A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A69CC6A1-9346-4331-B678-201FB56709A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A69CC6A1-9346-4331-B678-201FB56709A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A69CC6A1-9346-4331-B678-201FB56709A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,34 @@ Global
 		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27EECB3A-5E13-4CC7-92AA-E739097D671C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D23742BD-066A-4416-96B3-1B1ABDEF3EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23742BD-066A-4416-96B3-1B1ABDEF3EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23742BD-066A-4416-96B3-1B1ABDEF3EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23742BD-066A-4416-96B3-1B1ABDEF3EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E24F926-0B02-4C49-A7D5-38ABF97CCA19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E24F926-0B02-4C49-A7D5-38ABF97CCA19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E24F926-0B02-4C49-A7D5-38ABF97CCA19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E24F926-0B02-4C49-A7D5-38ABF97CCA19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA7E8BD-F2A0-4CC5-8EFB-871D3121DDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1F7B0D-B7A7-4ECA-AE06-DDF170071ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB85AB8-2E76-4971-9CBA-DE9B1997D384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67942D2-C5E4-457D-88DD-049ECEE3BFB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB295927-1FCF-46C5-A798-F2D77128F102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB295927-1FCF-46C5-A798-F2D77128F102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB295927-1FCF-46C5-A798-F2D77128F102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB295927-1FCF-46C5-A798-F2D77128F102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

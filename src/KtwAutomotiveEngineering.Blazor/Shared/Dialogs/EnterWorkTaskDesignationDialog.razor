@@ -1,0 +1,36 @@
+﻿@using KtwAutomotiveEngineering.Blazor.Shared.Dialogs.ResultModels
+<MudDialog DefaultFocus="DefaultFocus.FirstChild">
+    <TitleContent>
+        <MudText Typo="Typo.h6">Neue Aufgabe</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="Description" Label="Beschreibung" OnKeyUp="OnKeyUp" />
+        <MudTextField @bind-Value="Customer" Label="Kunde" OnKeyUp="OnKeyUp" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Error" OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="Submit">Hinzufügen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private const string ReturnKey = "Enter";
+
+    public string? Description { get; set; }
+    public string? Customer { get; set; }
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private void OnKeyUp(KeyboardEventArgs args)
+    {
+        if (args.Key == ReturnKey)
+            Submit();
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Submit()
+        => MudDialog.Close(DialogResult.Ok(
+            new EnterWorkTaskDesignationDialogResult(Description, Customer))
+        );
+}
